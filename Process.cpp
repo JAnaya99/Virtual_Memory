@@ -1,0 +1,31 @@
+#include "Process.h"
+#include "Status.h"
+#include <vector>
+
+namespace virtual_memory {
+    bool Process::OnRam(int page) {
+        return static_cast<bool>(ram_indexes_.count(page));
+    }
+
+    bool Process::OnSwapping(int page) {
+        return static_cast<bool>(swapping_indexes_.count(page));
+    }
+
+    void Process::EraseFromRam(int page, int new_pos) {
+        ram_indexes_.erase(page);
+        swapping_indexes_[page] = new_pos;
+    }
+
+    void Process::EraseFromSwapping(int page, int new_pos) {
+        swapping_indexes_.erase(page);
+        ram_indexes_[page] = new_pos;
+    }
+
+    int Process::GetIndexPageFromRam(int page){
+        return ram_indexes_[page];
+    }
+
+    void Process::SetIndexPageFromRam(int page, int new_pos){
+        ram_indexes_[page] = new_pos;
+    }
+}
