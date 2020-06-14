@@ -13,6 +13,7 @@ namespace virtual_memory{
 
         void Print(const std::vector<std::string> &text);
         void Print(const std::string &text);
+        std::string HeaderToString(char type, int id_process, int memory, int edit_field);
 
     private:
         std::ofstream output_file_;
