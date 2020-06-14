@@ -1,7 +1,7 @@
 #include "Page.h"
 
 namespace virtual_memory {
-    Page::Page(int id, int number_of_page, double timestamp, int arrival_number,  bool is_free) : id_(id), number_of_page_(number_of_page),
+    Page::Page(int id, int number_of_page, int timestamp, int arrival_number,  bool is_free) : id_(id), number_of_page_(number_of_page),
                                                                           timestamp_(timestamp), arrival_number_(arrival_number) , is_free_(is_free) {}
 
     int Page::GetId() const {

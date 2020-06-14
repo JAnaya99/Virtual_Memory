@@ -23,18 +23,23 @@ namespace virtual_memory {
 
         StatusOr<std::vector<std::string>> AccessVirtualMemory(int id_process, int memory);
 
+        StatusOr<std::vector<std::string>> FreeProcessMemory(int id_process);
+
     private:
         int cont_;
         int total_page_fault_;
-        double timestamp_;
+        int timestamp_;
 
         std::map<int, Process> index_process_;
         std::set<Page, T> running_process_;
         std::set<int> free_index_on_swapping_;
         std::set<int> free_index_on_ram_;
+        std::set<int> process_ids_;
         std::map<int, int> memory_of_process_;
         std::map<std::pair<int, int>, Page> db_;
-
+        std::map<int, int> first_timestamp_;
+        std::map<int, int> final_timestamp_;
+        
         //Remove t_size indexes from memory.
         std::vector<std::string> RemovePages(int t_size);
 
@@ -68,7 +73,7 @@ namespace virtual_memory {
     template<class T>
     PCB<T>::PCB() {
         total_page_fault_ = 0;
-        timestamp_ = 0.0;
+        timestamp_ = 0;
         cont_ = 0;
         for (int i = 0; i < constants::size_swapping; i++) {
             free_index_on_swapping_.insert(i);
@@ -103,6 +108,7 @@ namespace virtual_memory {
 
         //Save the memory of the process.
         memory_of_process_[id_process] = memory;
+        process_ids_.insert(id_process);
 
         //We need to remove some pages from ram.
         std::vector<std::string> information_process;
@@ -113,6 +119,9 @@ namespace virtual_memory {
 
         //Add the process to the RAM.
         AddInformation(information_process, AddProcess(id_process, s_number_of_pages.GetData()));
+
+        //Save the timestamp of the process.
+        first_timestamp_[id_process] = timestamp_;
 
         return StatusOr<std::vector<std::string>>(Status::kOk, information_process);
     }
@@ -141,7 +150,7 @@ namespace virtual_memory {
 
             //A page fault ocurred.
             ++total_page_fault_;
-            timestamp_ += 0.1;
+            timestamp_ += 10;
         }
         return information_process;
     }
@@ -156,7 +165,7 @@ namespace virtual_memory {
             process.SetIndexPageFromRam(i, free_slot);
 
             //Add one second to the timestamp.
-            timestamp_ += 1.0;
+            timestamp_ += 100;
 
             //Insert the process on RAM.
             running_process_.insert(Page(id_process, i, timestamp_, ++cont_, false));
@@ -239,29 +248,69 @@ namespace virtual_memory {
     template<class T>
     std::vector<std::string> PCB<T>::AddPageToRam(int id_process, int memory, int page_number, int move){
         std::vector<std::string> log_info;
-        timestamp_ += 0.1;
-        
+        timestamp_ += 10;
+        int secure_timestamp = timestamp_;
+
         //Erase from RAM and update the timestamp.
         Page page = db_[std::make_pair(id_process, page_number)];
         auto find_page = running_process_.find(page);
         int slot = 0;
         if(find_page != running_process_.end()){
             running_process_.erase(page);
-            running_process_.insert(Page(page.GetId(), page.GetNumberOfPage(), timestamp_, cont_, false));
+            running_process_.insert(Page(page.GetId(), page.GetNumberOfPage(), secure_timestamp, cont_, false));
             slot = GetIndexPage(page.GetId(), page.GetNumberOfPage());
         }else{
             //Get a free slot on RAM.
             int free_slot = GetFreeSlotOnRam();
-            index_process_[id_process].SetIndexPageFromRam(page_number, free_slot);
-            running_process_.insert(Page(page.GetId(), page.GetNumberOfPage(), timestamp_, ++cont_, false));
+            index_process_[id_process].EraseFromSwapping(page_number, free_slot);
+            running_process_.insert(Page(page.GetId(), page.GetNumberOfPage(), secure_timestamp, ++cont_, false));
             slot = free_slot;
         }
 
         //Update the database.
-        db_[std::make_pair(id_process, page_number)] = Page(page.GetId(), page.GetNumberOfPage(), timestamp_, cont_, false);
-        
+        db_[std::make_pair(id_process, page_number)] = Page(page.GetId(), page.GetNumberOfPage(), secure_timestamp, cont_, false);
         log_info.push_back("Virtual memory = " + std::to_string(memory) + " -> RAM Memory = " + std::to_string(move + slot * constants::size_page));
         return log_info;
+    }
+
+    template<class T>
+    StatusOr<std::vector<std::string>> PCB<T>::FreeProcessMemory(int id_process){
+        //The process is not on memory.
+        if (!OnPCB(id_process)) {
+            std::string log = "The process " + std::to_string(id_process) + " : is not on memory. \n";
+            return StatusOr<std::vector<std::string>>(Status::kError, log);
+        }
+        
+        //Calculate the number of pages this process needs.
+        int number_of_pages = GetNumberOfPages(memory_of_process_[id_process]).GetData();
+
+        std::vector<std::string> log_info;
+        log_info.push_back(std::to_string(number_of_pages) + " Pages will be released from memory");
+        
+        //Clear all pages
+        for(int i = 0; i < number_of_pages; i++){
+            running_process_.erase(db_[std::make_pair(id_process, i)]);
+            db_.erase(std::make_pair(id_process, i));
+            if(index_process_[id_process].OnRam(i)){
+                int indx = index_process_[id_process].GetIndexPageFromRam(i);
+                log_info.push_back("Page " + std::to_string(i) + " of the process was removed from frame " + std::to_string(indx) + " of RAM");
+                free_index_on_ram_.insert(indx);
+            }else{
+                int indx = index_process_[id_process].GetIndexPageFromSwapping(i);
+                log_info.push_back("Page " + std::to_string(i) + " of the process was removed from frame " + std::to_string(indx) + " of Swapping");
+                free_index_on_swapping_.insert(indx);
+            }
+            timestamp_ += 10;
+        }
+
+        //Delete from other data structures.
+        index_process_.erase(id_process);
+        memory_of_process_.erase(id_process);
+
+        //Save the final timestamp of this process
+        final_timestamp_[id_process] = timestamp_;
+
+        return StatusOr<std::vector<std::string>>(Status::kOk, log_info);
     }
 
 
