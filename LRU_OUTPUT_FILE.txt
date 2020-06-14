@@ -1,0 +1,343 @@
+P ( 2 , 32 )
+Page 0 of process 2 was placed in frame 0 of memory.
+Page 1 of process 2 was placed in frame 1 of memory.
+P ( 3 , 48 )
+Page 0 of process 3 was placed in frame 2 of memory.
+Page 1 of process 3 was placed in frame 3 of memory.
+Page 2 of process 3 was placed in frame 4 of memory.
+P ( 4 , 63 )
+Page 0 of process 4 was placed in frame 5 of memory.
+Page 1 of process 4 was placed in frame 6 of memory.
+Page 2 of process 4 was placed in frame 7 of memory.
+Page 3 of process 4 was placed in frame 8 of memory.
+L ( 3 ) Free process memory
+3 Pages will be released from memory
+Page 0 of the process was removed from frame 2 of RAM
+Page 1 of the process was removed from frame 3 of RAM
+Page 2 of the process was removed from frame 4 of RAM
+P ( 5 , 80 )
+Page 0 of process 5 was placed in frame 2 of memory.
+Page 1 of process 5 was placed in frame 3 of memory.
+Page 2 of process 5 was placed in frame 4 of memory.
+Page 3 of process 5 was placed in frame 9 of memory.
+Page 4 of process 5 was placed in frame 10 of memory.
+P ( 109 , 1744 )
+Page 0 of process 109 was placed in frame 11 of memory.
+Page 1 of process 109 was placed in frame 12 of memory.
+Page 2 of process 109 was placed in frame 13 of memory.
+Page 3 of process 109 was placed in frame 14 of memory.
+Page 4 of process 109 was placed in frame 15 of memory.
+Page 5 of process 109 was placed in frame 16 of memory.
+Page 6 of process 109 was placed in frame 17 of memory.
+Page 7 of process 109 was placed in frame 18 of memory.
+Page 8 of process 109 was placed in frame 19 of memory.
+Page 9 of process 109 was placed in frame 20 of memory.
+Page 10 of process 109 was placed in frame 21 of memory.
+Page 11 of process 109 was placed in frame 22 of memory.
+Page 12 of process 109 was placed in frame 23 of memory.
+Page 13 of process 109 was placed in frame 24 of memory.
+Page 14 of process 109 was placed in frame 25 of memory.
+Page 15 of process 109 was placed in frame 26 of memory.
+Page 16 of process 109 was placed in frame 27 of memory.
+Page 17 of process 109 was placed in frame 28 of memory.
+Page 18 of process 109 was placed in frame 29 of memory.
+Page 19 of process 109 was placed in frame 30 of memory.
+Page 20 of process 109 was placed in frame 31 of memory.
+Page 21 of process 109 was placed in frame 32 of memory.
+Page 22 of process 109 was placed in frame 33 of memory.
+Page 23 of process 109 was placed in frame 34 of memory.
+Page 24 of process 109 was placed in frame 35 of memory.
+Page 25 of process 109 was placed in frame 36 of memory.
+Page 26 of process 109 was placed in frame 37 of memory.
+Page 27 of process 109 was placed in frame 38 of memory.
+Page 28 of process 109 was placed in frame 39 of memory.
+Page 29 of process 109 was placed in frame 40 of memory.
+Page 30 of process 109 was placed in frame 41 of memory.
+Page 31 of process 109 was placed in frame 42 of memory.
+Page 32 of process 109 was placed in frame 43 of memory.
+Page 33 of process 109 was placed in frame 44 of memory.
+Page 34 of process 109 was placed in frame 45 of memory.
+Page 35 of process 109 was placed in frame 46 of memory.
+Page 36 of process 109 was placed in frame 47 of memory.
+Page 37 of process 109 was placed in frame 48 of memory.
+Page 38 of process 109 was placed in frame 49 of memory.
+Page 39 of process 109 was placed in frame 50 of memory.
+Page 40 of process 109 was placed in frame 51 of memory.
+Page 41 of process 109 was placed in frame 52 of memory.
+Page 42 of process 109 was placed in frame 53 of memory.
+Page 43 of process 109 was placed in frame 54 of memory.
+Page 44 of process 109 was placed in frame 55 of memory.
+Page 45 of process 109 was placed in frame 56 of memory.
+Page 46 of process 109 was placed in frame 57 of memory.
+Page 47 of process 109 was placed in frame 58 of memory.
+Page 48 of process 109 was placed in frame 59 of memory.
+Page 49 of process 109 was placed in frame 60 of memory.
+Page 50 of process 109 was placed in frame 61 of memory.
+Page 51 of process 109 was placed in frame 62 of memory.
+Page 52 of process 109 was placed in frame 63 of memory.
+Page 53 of process 109 was placed in frame 64 of memory.
+Page 54 of process 109 was placed in frame 65 of memory.
+Page 55 of process 109 was placed in frame 66 of memory.
+Page 56 of process 109 was placed in frame 67 of memory.
+Page 57 of process 109 was placed in frame 68 of memory.
+Page 58 of process 109 was placed in frame 69 of memory.
+Page 59 of process 109 was placed in frame 70 of memory.
+Page 60 of process 109 was placed in frame 71 of memory.
+Page 61 of process 109 was placed in frame 72 of memory.
+Page 62 of process 109 was placed in frame 73 of memory.
+Page 63 of process 109 was placed in frame 74 of memory.
+Page 64 of process 109 was placed in frame 75 of memory.
+Page 65 of process 109 was placed in frame 76 of memory.
+Page 66 of process 109 was placed in frame 77 of memory.
+Page 67 of process 109 was placed in frame 78 of memory.
+Page 68 of process 109 was placed in frame 79 of memory.
+Page 69 of process 109 was placed in frame 80 of memory.
+Page 70 of process 109 was placed in frame 81 of memory.
+Page 71 of process 109 was placed in frame 82 of memory.
+Page 72 of process 109 was placed in frame 83 of memory.
+Page 73 of process 109 was placed in frame 84 of memory.
+Page 74 of process 109 was placed in frame 85 of memory.
+Page 75 of process 109 was placed in frame 86 of memory.
+Page 76 of process 109 was placed in frame 87 of memory.
+Page 77 of process 109 was placed in frame 88 of memory.
+Page 78 of process 109 was placed in frame 89 of memory.
+Page 79 of process 109 was placed in frame 90 of memory.
+Page 80 of process 109 was placed in frame 91 of memory.
+Page 81 of process 109 was placed in frame 92 of memory.
+Page 82 of process 109 was placed in frame 93 of memory.
+Page 83 of process 109 was placed in frame 94 of memory.
+Page 84 of process 109 was placed in frame 95 of memory.
+Page 85 of process 109 was placed in frame 96 of memory.
+Page 86 of process 109 was placed in frame 97 of memory.
+Page 87 of process 109 was placed in frame 98 of memory.
+Page 88 of process 109 was placed in frame 99 of memory.
+Page 89 of process 109 was placed in frame 100 of memory.
+Page 90 of process 109 was placed in frame 101 of memory.
+Page 91 of process 109 was placed in frame 102 of memory.
+Page 92 of process 109 was placed in frame 103 of memory.
+Page 93 of process 109 was placed in frame 104 of memory.
+Page 94 of process 109 was placed in frame 105 of memory.
+Page 95 of process 109 was placed in frame 106 of memory.
+Page 96 of process 109 was placed in frame 107 of memory.
+Page 97 of process 109 was placed in frame 108 of memory.
+Page 98 of process 109 was placed in frame 109 of memory.
+Page 99 of process 109 was placed in frame 110 of memory.
+Page 100 of process 109 was placed in frame 111 of memory.
+Page 101 of process 109 was placed in frame 112 of memory.
+Page 102 of process 109 was placed in frame 113 of memory.
+Page 103 of process 109 was placed in frame 114 of memory.
+Page 104 of process 109 was placed in frame 115 of memory.
+Page 105 of process 109 was placed in frame 116 of memory.
+Page 106 of process 109 was placed in frame 117 of memory.
+Page 107 of process 109 was placed in frame 118 of memory.
+Page 108 of process 109 was placed in frame 119 of memory.
+P ( 6 , 96 )
+Page 0 of process 6 was placed in frame 120 of memory.
+Page 1 of process 6 was placed in frame 121 of memory.
+Page 2 of process 6 was placed in frame 122 of memory.
+Page 3 of process 6 was placed in frame 123 of memory.
+Page 4 of process 6 was placed in frame 124 of memory.
+Page 5 of process 6 was placed in frame 125 of memory.
+A ( 2 , 16 , 0 )Read virtual memory
+Virtual memory = 16 -> RAM Memory = 16
+A ( 4 , 63 , 0 )Read virtual memory
+Virtual memory = 63 -> RAM Memory = 143
+A ( 4 , 62 , 1 )Write virtual memory
+Virtual memory = 62 -> RAM Memory = 142
+A ( 109 , 1 , 1 )Write virtual memory
+Virtual memory = 1 -> RAM Memory = 177
+P ( 61 , 96 )
+There are not enough free pages in memory. Therefore the following pages will be removed
+Page 0 of process 2 was changed to frame 0 of the swapping area.
+Page 0 of process 4 was changed to frame 1 of the swapping area.
+Page 1 of process 4 was changed to frame 2 of the swapping area.
+Page 2 of process 4 was changed to frame 3 of the swapping area.
+Page 0 of process 61 was placed in frame 0 of memory.
+Page 1 of process 61 was placed in frame 5 of memory.
+Page 2 of process 61 was placed in frame 6 of memory.
+Page 3 of process 61 was placed in frame 7 of memory.
+Page 4 of process 61 was placed in frame 126 of memory.
+Page 5 of process 61 was placed in frame 127 of memory.
+L ( 2 ) Free process memory
+2 Pages will be released from memory
+Page 0 of the process was removed from frame 0 of Swapping
+Page 1 of the process was removed from frame 1 of RAM
+A ( 5 , 8 , 0 )Read virtual memory
+Virtual memory = 8 -> RAM Memory = 40
+A ( 4 , 8 , 0 )Read virtual memory
+The virtual memory 8 is on frame 1 in swapping area.
+The page was brought into RAM (A page fault occurred).
+Virtual memory = 8 -> RAM Memory = 24
+L ( 5 ) Free process memory
+5 Pages will be released from memory
+Page 0 of the process was removed from frame 2 of RAM
+Page 1 of the process was removed from frame 3 of RAM
+Page 2 of the process was removed from frame 4 of RAM
+Page 3 of the process was removed from frame 9 of RAM
+Page 4 of the process was removed from frame 10 of RAM
+L ( 2 ) Free process memory
+The process 2 : is not on memory.
+L ( 4 ) Free process memory
+4 Pages will be released from memory
+Page 0 of the process was removed from frame 1 of RAM
+Page 1 of the process was removed from frame 2 of Swapping
+Page 2 of the process was removed from frame 3 of Swapping
+Page 3 of the process was removed from frame 8 of RAM
+L ( 6 ) Free process memory
+6 Pages will be released from memory
+Page 0 of the process was removed from frame 120 of RAM
+Page 1 of the process was removed from frame 121 of RAM
+Page 2 of the process was removed from frame 122 of RAM
+Page 3 of the process was removed from frame 123 of RAM
+Page 4 of the process was removed from frame 124 of RAM
+Page 5 of the process was removed from frame 125 of RAM
+L ( 61 ) Free process memory
+6 Pages will be released from memory
+Page 0 of the process was removed from frame 0 of RAM
+Page 1 of the process was removed from frame 5 of RAM
+Page 2 of the process was removed from frame 6 of RAM
+Page 3 of the process was removed from frame 7 of RAM
+Page 4 of the process was removed from frame 126 of RAM
+Page 5 of the process was removed from frame 127 of RAM
+L ( 109 ) Free process memory
+109 Pages will be released from memory
+Page 0 of the process was removed from frame 11 of RAM
+Page 1 of the process was removed from frame 12 of RAM
+Page 2 of the process was removed from frame 13 of RAM
+Page 3 of the process was removed from frame 14 of RAM
+Page 4 of the process was removed from frame 15 of RAM
+Page 5 of the process was removed from frame 16 of RAM
+Page 6 of the process was removed from frame 17 of RAM
+Page 7 of the process was removed from frame 18 of RAM
+Page 8 of the process was removed from frame 19 of RAM
+Page 9 of the process was removed from frame 20 of RAM
+Page 10 of the process was removed from frame 21 of RAM
+Page 11 of the process was removed from frame 22 of RAM
+Page 12 of the process was removed from frame 23 of RAM
+Page 13 of the process was removed from frame 24 of RAM
+Page 14 of the process was removed from frame 25 of RAM
+Page 15 of the process was removed from frame 26 of RAM
+Page 16 of the process was removed from frame 27 of RAM
+Page 17 of the process was removed from frame 28 of RAM
+Page 18 of the process was removed from frame 29 of RAM
+Page 19 of the process was removed from frame 30 of RAM
+Page 20 of the process was removed from frame 31 of RAM
+Page 21 of the process was removed from frame 32 of RAM
+Page 22 of the process was removed from frame 33 of RAM
+Page 23 of the process was removed from frame 34 of RAM
+Page 24 of the process was removed from frame 35 of RAM
+Page 25 of the process was removed from frame 36 of RAM
+Page 26 of the process was removed from frame 37 of RAM
+Page 27 of the process was removed from frame 38 of RAM
+Page 28 of the process was removed from frame 39 of RAM
+Page 29 of the process was removed from frame 40 of RAM
+Page 30 of the process was removed from frame 41 of RAM
+Page 31 of the process was removed from frame 42 of RAM
+Page 32 of the process was removed from frame 43 of RAM
+Page 33 of the process was removed from frame 44 of RAM
+Page 34 of the process was removed from frame 45 of RAM
+Page 35 of the process was removed from frame 46 of RAM
+Page 36 of the process was removed from frame 47 of RAM
+Page 37 of the process was removed from frame 48 of RAM
+Page 38 of the process was removed from frame 49 of RAM
+Page 39 of the process was removed from frame 50 of RAM
+Page 40 of the process was removed from frame 51 of RAM
+Page 41 of the process was removed from frame 52 of RAM
+Page 42 of the process was removed from frame 53 of RAM
+Page 43 of the process was removed from frame 54 of RAM
+Page 44 of the process was removed from frame 55 of RAM
+Page 45 of the process was removed from frame 56 of RAM
+Page 46 of the process was removed from frame 57 of RAM
+Page 47 of the process was removed from frame 58 of RAM
+Page 48 of the process was removed from frame 59 of RAM
+Page 49 of the process was removed from frame 60 of RAM
+Page 50 of the process was removed from frame 61 of RAM
+Page 51 of the process was removed from frame 62 of RAM
+Page 52 of the process was removed from frame 63 of RAM
+Page 53 of the process was removed from frame 64 of RAM
+Page 54 of the process was removed from frame 65 of RAM
+Page 55 of the process was removed from frame 66 of RAM
+Page 56 of the process was removed from frame 67 of RAM
+Page 57 of the process was removed from frame 68 of RAM
+Page 58 of the process was removed from frame 69 of RAM
+Page 59 of the process was removed from frame 70 of RAM
+Page 60 of the process was removed from frame 71 of RAM
+Page 61 of the process was removed from frame 72 of RAM
+Page 62 of the process was removed from frame 73 of RAM
+Page 63 of the process was removed from frame 74 of RAM
+Page 64 of the process was removed from frame 75 of RAM
+Page 65 of the process was removed from frame 76 of RAM
+Page 66 of the process was removed from frame 77 of RAM
+Page 67 of the process was removed from frame 78 of RAM
+Page 68 of the process was removed from frame 79 of RAM
+Page 69 of the process was removed from frame 80 of RAM
+Page 70 of the process was removed from frame 81 of RAM
+Page 71 of the process was removed from frame 82 of RAM
+Page 72 of the process was removed from frame 83 of RAM
+Page 73 of the process was removed from frame 84 of RAM
+Page 74 of the process was removed from frame 85 of RAM
+Page 75 of the process was removed from frame 86 of RAM
+Page 76 of the process was removed from frame 87 of RAM
+Page 77 of the process was removed from frame 88 of RAM
+Page 78 of the process was removed from frame 89 of RAM
+Page 79 of the process was removed from frame 90 of RAM
+Page 80 of the process was removed from frame 91 of RAM
+Page 81 of the process was removed from frame 92 of RAM
+Page 82 of the process was removed from frame 93 of RAM
+Page 83 of the process was removed from frame 94 of RAM
+Page 84 of the process was removed from frame 95 of RAM
+Page 85 of the process was removed from frame 96 of RAM
+Page 86 of the process was removed from frame 97 of RAM
+Page 87 of the process was removed from frame 98 of RAM
+Page 88 of the process was removed from frame 99 of RAM
+Page 89 of the process was removed from frame 100 of RAM
+Page 90 of the process was removed from frame 101 of RAM
+Page 91 of the process was removed from frame 102 of RAM
+Page 92 of the process was removed from frame 103 of RAM
+Page 93 of the process was removed from frame 104 of RAM
+Page 94 of the process was removed from frame 105 of RAM
+Page 95 of the process was removed from frame 106 of RAM
+Page 96 of the process was removed from frame 107 of RAM
+Page 97 of the process was removed from frame 108 of RAM
+Page 98 of the process was removed from frame 109 of RAM
+Page 99 of the process was removed from frame 110 of RAM
+Page 100 of the process was removed from frame 111 of RAM
+Page 101 of the process was removed from frame 112 of RAM
+Page 102 of the process was removed from frame 113 of RAM
+Page 103 of the process was removed from frame 114 of RAM
+Page 104 of the process was removed from frame 115 of RAM
+Page 105 of the process was removed from frame 116 of RAM
+Page 106 of the process was removed from frame 117 of RAM
+Page 107 of the process was removed from frame 118 of RAM
+Page 108 of the process was removed from frame 119 of RAM
+F
+Statistics:
+Turnarounds:
+2 -> 	139.9
+3 -> 	7.3
+4 -> 	137.0
+5 -> 	132.3
+6 -> 	19.3
+61 -> 	13.5
+109 -> 	139.8
+Turnaround promedio: 84.157143
+Page fault: 	5
+Swap in: 		1
+Swap out: 		4
+
+
+New instruction block:
+A ( 2 , 2 , 0 )Read virtual memory
+Status = ERROR. LOG: The process 2 : is not on memory.
+P ( 2049 , 2049 )
+Status = ERROR. LOG: The process 2049 : Memory limit exceeded
+F
+Statistics:
+Turnarounds:
+Turnaround promedio: --
+Page fault: 	0
+Swap in: 		0
+Swap out: 		0
+
+
+New instruction block:

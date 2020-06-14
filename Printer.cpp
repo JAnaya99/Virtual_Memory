@@ -27,7 +27,9 @@ namespace virtual_memory{
         else if(type == 'A')
             return std::string(1, type) + " ( " + std::to_string(id_process) + " , " + std::to_string(memory) + " , " + std::to_string(edit_field) +" )" + (edit_field == 1 ? "Write virtual memory" : "Read virtual memory");
         else if(type == 'L')
-            return std::string(1, type) + " ( " + std::to_string(id_process) + " ) Free process memory"; 
+            return std::string(1, type) + " ( " + std::to_string(id_process) + " ) Free process memory";
+        else if(type == 'F')
+            return std::string(1, type) + "\n" + "Statistics:";
     }
 
 } // virtual_memory
