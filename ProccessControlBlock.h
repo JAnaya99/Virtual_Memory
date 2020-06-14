@@ -10,21 +10,28 @@
 #include "Page.h"
 #include "Constants.h"
 
-//TODO: Add comments.
 namespace virtual_memory {
+    // This class is a process control block. It is responsible for monitoring each process and swapping them between
+    // the RAM and Swapping area.
     template<class T>
     class PCB {
     public:
+        //Constructor.
         PCB();
 
+        //Return true if the process is on PCB.
         bool OnPCB(int id_process);
 
+        //Put a process on RAM. If it does not fit, the necessary changes will be made.
         StatusOr<std::vector<std::string>> UploadProcess(int id_process, int memory);
 
+        //Read and write a specific virtual memory of a process.
         StatusOr<std::vector<std::string>> AccessVirtualMemory(int id_process, int memory);
 
+        //Free all pages of a process.
         StatusOr<std::vector<std::string>> FreeProcessMemory(int id_process);
 
+        //Return the turnaround and the total swaps in and swaps out.
         StatusOr<std::vector<std::string>> GetStatics();
 
     private:
@@ -34,6 +41,7 @@ namespace virtual_memory {
         int swap_in_;
         int swap_out_;
 
+        // Dictionaries to monitoring the process.
         std::map<int, Process> index_process_;
         std::set<Page, T> running_process_;
         std::set<int> free_index_on_swapping_;
@@ -44,28 +52,38 @@ namespace virtual_memory {
         std::map<int, int> first_timestamp_;
         std::map<int, int> final_timestamp_;
 
-        //Remove t_size indexes from memory.
+        //Private auxiliary functions.
+        //Swap n pages from RAM to Swapping area.
         std::vector<std::string> RemovePages(int t_size);
 
+        //Add n pages to RAM.
         std::vector<std::string> AddProcess(int id_process, int number_of_pages);
 
+        //Add one page to RAM.
         std::vector<std::string> AddPageToRam(int id_process, int memory, int page_number, int move);
 
+        //Return the index in RAM of a process.
         int GetIndexPage(int id, int memory);
 
+        //Return a free space on swapping.
         int GetFreeSlotOnSwapping();
 
+        //Return a free space on RAM.
         int GetFreeSlotOnRam();
 
+        //Return the number of page of a virtual memory.
         StatusOr<int> GetNumberOfPages(int memory);
 
+        //Join two vectors.
         void AddInformation(std::vector<std::string> &a, const std::vector<std::string> &b);
 
+        //Transform int to string, this function only works when divide by 10.
         std::string Transform(int turnaround);
     };
 
     template<class T>
     StatusOr<int> PCB<T>::GetNumberOfPages(int memory) {
+        //Calculate the number of pages.
         int number_of_pages = memory / constants::size_page;
         if (memory % constants::size_page != 0) {
             ++number_of_pages;

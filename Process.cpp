@@ -13,12 +13,16 @@ namespace virtual_memory {
     }
 
     void Process::EraseFromRam(int page, int new_pos) {
+        //Erase from RAM.
         ram_indexes_.erase(page);
+        //Insert on swapping.
         swapping_indexes_[page] = new_pos;
     }
 
     void Process::EraseFromSwapping(int page, int new_pos) {
+        //Erase from swapping.
         swapping_indexes_.erase(page);
+        //Insert on RAM.
         ram_indexes_[page] = new_pos;
     }
 

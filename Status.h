@@ -5,14 +5,18 @@
 
 namespace virtual_memory {
 
+    // There are two types of status OK and ERROR.
     enum class Status {
         kOk = 0,
         kError,
     };
 
+    // This class is a better implementation of try - catch.
+    // It allows you to call functions and know the status of the return value.
     template<class T>
     class StatusOr {
     public:
+        //Constructors.
         StatusOr() = default;
 
         StatusOr(Status status, T data, std::string message);
@@ -25,6 +29,7 @@ namespace virtual_memory {
 
         StatusOr &operator=(const StatusOr &other) = default;
 
+        //Getters.
         Status GetStatus();
 
         std::string GetMessage();

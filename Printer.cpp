@@ -22,15 +22,16 @@ namespace virtual_memory {
     }
 
     std::string Printer::HeaderToString(char type, int id_process, int memory, int edit_field) {
+        // Upload process.
         if (type == 'P')
             return std::string(1, type) + " ( " + std::to_string(id_process) + " , " + std::to_string(memory) + " )";
-        else if (type == 'A')
+        else if (type == 'A') // Access virtual memory.
             return std::string(1, type) + " ( " + std::to_string(id_process) + " , " + std::to_string(memory) + " , " +
                    std::to_string(edit_field) + " )" +
                    (edit_field == 1 ? "Write virtual memory" : "Read virtual memory");
-        else if (type == 'L')
+        else if (type == 'L') // Free memory.
             return std::string(1, type) + " ( " + std::to_string(id_process) + " ) Free process memory";
-        else if (type == 'F')
+        else if (type == 'F') // Clear process control block and print statistics.
             return std::string(1, type) + "\n" + "Statistics:";
     }
 
