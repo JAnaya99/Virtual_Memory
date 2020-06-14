@@ -4,42 +4,62 @@
 #include <vector>
 #include <string>
 #include "OS.h"
+#include "Reader.h"
 
 using namespace std;
 
-int main() {
-    cout << "helo " << endl;
+int main(){
     virtual_memory::OS system;
-    // Delete this comment.
-    //CHECK OUTPUT LIMIT OF MEMORY > 2049
-    {
-        system.UploadProcess(2, 32);
-        system.UploadProcess(3, 48);
-        system.UploadProcess(4, 63);
-        system.FreeProcess(3);
-        system.UploadProcess(5, 80);
-        system.UploadProcess(109, 1744);
-        system.UploadProcess(6, 96);
-        system.AccessVirtualMemory(2, 16, 0);
-        system.AccessVirtualMemory(4, 63, 0);
-        system.AccessVirtualMemory(4, 62, 1);
-        system.AccessVirtualMemory(109, 1, 1);
-        system.UploadProcess(61, 96);
-        system.FreeProcess(2);
-        system.AccessVirtualMemory(5, 8, 0);
-        system.AccessVirtualMemory(4, 8, 0);
-        system.FreeProcess(5);
-        system.FreeProcess(2);
-        system.FreeProcess(4);
-        system.FreeProcess(6);
-        system.FreeProcess(61);
-        system.FreeProcess(109);
-        system.RestartMemory();
-        system.AccessVirtualMemory(2, 2, 0);
-        system.UploadProcess(2049, 2049);
-        system.RestartMemory();
-    }
+    virtual_memory::Reader reader;
 
+    std::string file_name;
+    std::cout << "Ingresa el PATH del archivo de instrucciones:  " << std::endl;
+    std::cin >> file_name;
+
+    if(reader.addInputFile(file_name)){
+        virtual_memory::StatusOr<virtual_memory::Instruction> current_instruction = reader.getNextInstruction();
+        while(current_instruction.GetStatus() == virtual_memory::Status::kOk){
+            virtual_memory::InstructionType current_type = current_instruction.GetData().type();
+            virtual_memory::Instruction instruction = current_instruction.GetData();
+            if(current_type == virtual_memory::InstructionType::load){
+                // Load a process
+                cout << "Instruccion de carga" << endl;
+                cout << instruction.numBytes() << ", process: " << instruction.process() << endl;
+            }
+            else if(current_type == virtual_memory::InstructionType::access){
+                // Access to address
+                cout << "Instruccion de acceso" << endl;
+                cout << instruction.address() << ", process: " << instruction.process() << ", mode= " << instruction.mode() << endl;
+            }
+            else if(current_type == virtual_memory::InstructionType::free){
+                // Free pages
+                cout << "Instruccion de liberar" << endl;
+                cout << "process: " << instruction.process() << endl;
+            }
+            else if(current_type == virtual_memory::InstructionType::comment){
+                // Add comment
+                cout << "Instruccion de comentario" << endl;
+                cout << "Comment: " << instruction.message() << endl;
+            }
+            else if(current_type == virtual_memory::InstructionType::end){
+                // End of the request set
+                cout << "Instruccion de termino de conjunto" << endl;
+            }
+            else if(current_type == virtual_memory::InstructionType::exit){
+                // Exit program
+                cout << "Instruccion de salida" << endl;
+            }
+            else {
+                // Output ignoring type
+                cout << "Instruccion incorrecta" << endl;
+                cout << "Message: " << instruction.message() << endl;
+            }
+            current_instruction = reader.getNextInstruction();
+        }
+    }
+    else{
+        cout << "ERROR: El archivo no existe. Revisa el nombre ingresado" << endl;
+    }
 
     return 0;
 }

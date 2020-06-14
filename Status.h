@@ -9,6 +9,7 @@ namespace virtual_memory {
     enum class Status {
         kOk = 0,
         kError,
+        kEnd
     };
 
     // This class is a better implementation of try - catch.
