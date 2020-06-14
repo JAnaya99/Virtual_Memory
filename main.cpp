@@ -13,22 +13,31 @@ int main(){
     // Delete this comment.
     //CHECK OUTPUT LIMIT OF MEMORY > 2049
     {
-        system.UploadProcess(0, 2048);
-        system.UploadProcess(1, 16);
-        system.UploadProcess(2, 32);
-        system.AccessVirtualMemory(0, 15, 1);
-        system.AccessVirtualMemory(0, 21, 0);
-        system.AccessVirtualMemory(0, 15, 1);
-        system.AccessVirtualMemory(0, 21, 0);
-        system.AccessVirtualMemory(0, 15, 1);
-        system.AccessVirtualMemory(0, 21, 0);
-        system.AccessVirtualMemory(0, 15, 1);
-        system.AccessVirtualMemory(0, 21, 0);
-        system.FreeProcess(5);
-        system.FreeProcess(1);
-        system.FreeProcess(0);
-        system.UploadProcess(5, 33);
-        system.UploadProcess(0, 16);
+       system.UploadProcess(2, 32);
+       system.UploadProcess(3, 48);
+       system.UploadProcess(4, 63);
+       system.FreeProcess(3);
+       system.UploadProcess(5, 80);
+       system.UploadProcess(109, 1744);
+       system.UploadProcess(6, 96);
+       system.AccessVirtualMemory(2,16,0);
+       system.AccessVirtualMemory(4,63,0);
+       system.AccessVirtualMemory(4,62,1);
+       system.AccessVirtualMemory(109,1,1);
+       system.UploadProcess(61,96);
+       system.FreeProcess(2);
+       system.AccessVirtualMemory(5,8,0);
+       system.AccessVirtualMemory(4,8,0);
+       system.FreeProcess(5);
+       system.FreeProcess(2);
+       system.FreeProcess(4);
+       system.FreeProcess(6);
+       system.FreeProcess(61);
+       system.FreeProcess(109);
+       system.RestartMemory();
+       system.AccessVirtualMemory(2,2,0);
+       system.UploadProcess(2049,2049);
+       system.RestartMemory();
     }
 
 

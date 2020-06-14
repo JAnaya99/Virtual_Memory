@@ -1,6 +1,7 @@
 #include "Process.h"
 #include "Status.h"
 #include <vector>
+#include <iostream>
 
 namespace virtual_memory {
     bool Process::OnRam(int page) {

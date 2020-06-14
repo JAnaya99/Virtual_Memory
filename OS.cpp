@@ -41,6 +41,21 @@ namespace virtual_memory {
         PrintResults(fifo_file_output_, fifo_status);
     }
 
+    void OS::RestartMemory(){
+        //Print the comand.
+        PrintHeaders('F');
+
+        //Get the full statics.
+        StatusOr<std::vector<std::string>> lru_status = pcb_LRU_.GetStatics();
+        PrintResults(lru_file_output_, lru_status);
+        StatusOr<std::vector<std::string>> fifo_status = pcb_FIFO_.GetStatics();
+        PrintResults(fifo_file_output_, fifo_status);
+
+        //Restart the proccess control block.
+        pcb_LRU_ = PCB<replacement_algorithms::LRU>();
+        pcb_FIFO_ = PCB<replacement_algorithms::FIFO>();
+    }
+
     void OS::PrintHeaders(char type, int id_process, int memory_or_page, int edit_field){
         //Print the comand in both files.
         lru_file_output_.Print(lru_file_output_.HeaderToString(type, id_process, memory_or_page, edit_field));

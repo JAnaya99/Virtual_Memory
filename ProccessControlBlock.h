@@ -25,10 +25,14 @@ namespace virtual_memory {
 
         StatusOr<std::vector<std::string>> FreeProcessMemory(int id_process);
 
+        StatusOr<std::vector<std::string>> GetStatics();
+
     private:
         int cont_;
         int total_page_fault_;
         int timestamp_;
+        int swap_in_;
+        int swap_out_;
 
         std::map<int, Process> index_process_;
         std::set<Page, T> running_process_;
@@ -55,7 +59,7 @@ namespace virtual_memory {
         StatusOr<int> GetNumberOfPages(int memory);
 
         void AddInformation(std::vector<std::string>& a, const std::vector<std::string>& b); 
-
+        std::string Transform(int turnaround);
     };
 
     template<class T>
@@ -72,6 +76,8 @@ namespace virtual_memory {
 
     template<class T>
     PCB<T>::PCB() {
+        swap_in_ = 0;
+        swap_out_ = 0;
         total_page_fault_ = 0;
         timestamp_ = 0;
         cont_ = 0;
@@ -102,13 +108,16 @@ namespace virtual_memory {
 
         //The process is already on memory.
         if (OnPCB(id_process)) {
-            std::string log = "The process " + std::to_string(id_process) + " : is already on memory.";
+            std::string log = "Status = ERROR. LOG: The process " + std::to_string(id_process) + " : is already on memory.";
             return StatusOr<std::vector<std::string>>(Status::kError, log);
         }
 
         //Save the memory of the process.
         memory_of_process_[id_process] = memory;
         process_ids_.insert(id_process);
+
+        //Save the timestamp of the process.
+        first_timestamp_[id_process] = timestamp_;
 
         //We need to remove some pages from ram.
         std::vector<std::string> information_process;
@@ -119,10 +128,7 @@ namespace virtual_memory {
 
         //Add the process to the RAM.
         AddInformation(information_process, AddProcess(id_process, s_number_of_pages.GetData()));
-
-        //Save the timestamp of the process.
-        first_timestamp_[id_process] = timestamp_;
-
+        
         return StatusOr<std::vector<std::string>>(Status::kOk, information_process);
     }
 
@@ -142,15 +148,16 @@ namespace virtual_memory {
 
             //Get a empty slot in the swapping area.
             int free_slot = GetFreeSlotOnSwapping();
-            index_process_[page_to_remove.GetId()].EraseFromRam(index_page, free_slot);
-
+            index_process_[page_to_remove.GetId()].EraseFromRam(page_to_remove.GetNumberOfPage(), free_slot);
+            
             // Add the log info to the status process.
-            std::string log_process_swapping = "Page " + std::to_string(page_to_remove.GetNumberOfPage()) + " of process " + std::to_string(page_to_remove.GetId()) + " was changed to frame " + std::to_string(index_page) + " of the swapping area.";
+            std::string log_process_swapping = "Page " + std::to_string(page_to_remove.GetNumberOfPage()) + " of process " + std::to_string(page_to_remove.GetId()) + " was changed to frame " + std::to_string(free_slot) + " of the swapping area.";
             information_process.push_back(log_process_swapping);
 
             //A page fault ocurred.
             ++total_page_fault_;
             timestamp_ += 10;
+            ++swap_out_;
         }
         return information_process;
     }
@@ -165,11 +172,11 @@ namespace virtual_memory {
             process.SetIndexPageFromRam(i, free_slot);
 
             //Add one second to the timestamp.
-            timestamp_ += 100;
+            timestamp_ += 10;
 
             //Insert the process on RAM.
             running_process_.insert(Page(id_process, i, timestamp_, ++cont_, false));
-            db_[std::make_pair(id_process, i)] = Page(id_process, i, timestamp_, ++cont_, false);
+            db_[std::make_pair(id_process, i)] = Page(id_process, i, timestamp_, cont_, false);
 
             // Add the log info to the status process.
             std::string log_process_swapping = "Page " + std::to_string(i) + " of process " + std::to_string(id_process) + " was placed in frame " + std::to_string(free_slot) + " of memory.";
@@ -203,13 +210,13 @@ namespace virtual_memory {
     StatusOr<std::vector<std::string>> PCB<T>::AccessVirtualMemory(int id_process, int memory) {
         //The process is not on memory.
         if (!OnPCB(id_process)) {
-            std::string log = "The process " + std::to_string(id_process) + " : is not on memory. \n";
+            std::string log = "Status = ERROR. LOG: The process " + std::to_string(id_process) + " : is not on memory.";
             return StatusOr<std::vector<std::string>>(Status::kError, log);
         }
 
         //The memory is greater than the process memory limit.
         if (memory > memory_of_process_[id_process]){
-            std::string log = "The process " + std::to_string(id_process) + " : is asking for more memory than it has. \n";
+            std::string log = "Status = ERROR. LOG: The process " + std::to_string(id_process) + " : is asking for more memory than it has.";
             return StatusOr<std::vector<std::string>>(Status::kError, log);
         }
 
@@ -228,8 +235,13 @@ namespace virtual_memory {
             if(free_index_on_ram_.empty()){
                 information_process.push_back("There are not enough free pages in memory. Therefore the following pages will be removed.");
                 AddInformation(information_process, RemovePages(1));
+                --total_page_fault_;
             }
+
+            // Swap-in operation.
             information_process.push_back("The page was brought into RAM (A page fault occurred).");
+            timestamp_ += 10;
+            ++swap_in_;
             ++total_page_fault_;
         }
 
@@ -248,27 +260,30 @@ namespace virtual_memory {
     template<class T>
     std::vector<std::string> PCB<T>::AddPageToRam(int id_process, int memory, int page_number, int move){
         std::vector<std::string> log_info;
-        timestamp_ += 10;
+        // Take one second to access a page.
+        timestamp_ += 1;
         int secure_timestamp = timestamp_;
 
         //Erase from RAM and update the timestamp.
         Page page = db_[std::make_pair(id_process, page_number)];
         auto find_page = running_process_.find(page);
         int slot = 0;
+        int secure_cont = page.GetArrivalNumber();
         if(find_page != running_process_.end()){
             running_process_.erase(page);
-            running_process_.insert(Page(page.GetId(), page.GetNumberOfPage(), secure_timestamp, cont_, false));
+            running_process_.insert(Page(page.GetId(), page.GetNumberOfPage(), secure_timestamp, secure_cont, false));
             slot = GetIndexPage(page.GetId(), page.GetNumberOfPage());
         }else{
             //Get a free slot on RAM.
+            secure_cont = ++cont_;
             int free_slot = GetFreeSlotOnRam();
             index_process_[id_process].EraseFromSwapping(page_number, free_slot);
-            running_process_.insert(Page(page.GetId(), page.GetNumberOfPage(), secure_timestamp, ++cont_, false));
+            running_process_.insert(Page(page.GetId(), page.GetNumberOfPage(), secure_timestamp, secure_cont, false));
             slot = free_slot;
         }
 
         //Update the database.
-        db_[std::make_pair(id_process, page_number)] = Page(page.GetId(), page.GetNumberOfPage(), secure_timestamp, cont_, false);
+        db_[std::make_pair(id_process, page_number)] = Page(page.GetId(), page.GetNumberOfPage(), secure_timestamp, secure_cont, false);
         log_info.push_back("Virtual memory = " + std::to_string(memory) + " -> RAM Memory = " + std::to_string(move + slot * constants::size_page));
         return log_info;
     }
@@ -277,7 +292,7 @@ namespace virtual_memory {
     StatusOr<std::vector<std::string>> PCB<T>::FreeProcessMemory(int id_process){
         //The process is not on memory.
         if (!OnPCB(id_process)) {
-            std::string log = "The process " + std::to_string(id_process) + " : is not on memory. \n";
+            std::string log = "The process " + std::to_string(id_process) + " : is not on memory.";
             return StatusOr<std::vector<std::string>>(Status::kError, log);
         }
         
@@ -300,7 +315,9 @@ namespace virtual_memory {
                 log_info.push_back("Page " + std::to_string(i) + " of the process was removed from frame " + std::to_string(indx) + " of Swapping");
                 free_index_on_swapping_.insert(indx);
             }
-            timestamp_ += 10;
+
+            //Take one second release each page.
+            timestamp_ += 1;
         }
 
         //Delete from other data structures.
@@ -309,8 +326,45 @@ namespace virtual_memory {
 
         //Save the final timestamp of this process
         final_timestamp_[id_process] = timestamp_;
-
         return StatusOr<std::vector<std::string>>(Status::kOk, log_info);
+    }
+
+    template<class T>
+    StatusOr<std::vector<std::string>> PCB<T>::GetStatics(){
+        std::vector<std::string> log_info;
+        //Calculate turnarounds.
+        log_info.push_back("Turnarounds:");
+        int turnaround_sum = 0;
+        int curr_turnaround = 0;
+        for(int id_process : process_ids_){
+            if(final_timestamp_.count(id_process) > 0){
+                curr_turnaround = final_timestamp_[id_process] - first_timestamp_[id_process];
+            }else{
+                curr_turnaround = timestamp_ - first_timestamp_[id_process];
+            }
+            
+            log_info.push_back(std::to_string(id_process) + " -> \t" + Transform(curr_turnaround));
+            turnaround_sum += curr_turnaround;
+        }
+
+        //Check for division by zero.
+        if(!process_ids_.empty()){
+            log_info.push_back("Turnaround promedio: " + std::to_string(static_cast<double>(turnaround_sum) / (static_cast<int>(process_ids_.size() * 10.0))));
+        }else{
+            log_info.push_back("Turnaround promedio: --");
+        }
+
+        //Create the info for the total page fault and swap-in, swap-out operations.
+        log_info.push_back("Page fault: \t" + std::to_string(total_page_fault_));
+        log_info.push_back("Swap in: \t\t" + std::to_string(swap_in_));
+        log_info.push_back("Swap out: \t\t" + std::to_string(swap_out_));
+        log_info.push_back("\n\nNew instruction block:");
+        return StatusOr<std::vector<std::string>>(Status::kOk, log_info);
+    }
+
+    template<class T>
+    std::string PCB<T>::Transform(int turnaround){
+        return std::to_string(turnaround / 10) + "." + std::to_string(turnaround % 10);
     }
 
 

@@ -21,6 +21,8 @@ namespace virtual_memory {
         //TODO: ADD EXPLANATION
         void FreeProcess(int id_process);
 
+        void RestartMemory();
+
         
     private:
         //Data for FIFO algorithm.
@@ -32,7 +34,7 @@ namespace virtual_memory {
         Printer lru_file_output_;
 
         //TODO: ADD  EXPLANATION
-        void PrintHeaders(char type, int id_process, int memory_or_page = -1, int edit_field = -1);
+        void PrintHeaders(char type, int id_process = -1, int memory_or_page = -1, int edit_field = -1);
         void PrintResults(Printer& a, StatusOr<std::vector<std::string>>& status);
     };
 }
