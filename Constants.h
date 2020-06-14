@@ -11,6 +11,11 @@ namespace constants{
     constexpr int size_swapping = 4092;
     const std::string LRU_file_path = "LRU_OUTPUT_FILE.txt";
     const std::string FIFO_file_path = "FIFO_OUTPUT_FILE.txt";
+    const std::string parameters_required = "Parameters are missing";
+    const std::string load_parameters_missing = "Load instructions require 2 parameters";
+    const std::string access_parameters_missing = "Access/modify instructions require 3 parameters";
+    const std::string free_parameters_missing = "Free memory instructions require 1 parameter";
+    const std::string access_mode_restriction = "Last parameter in access instructions can only be 0 or 1";
 }
 }
 
