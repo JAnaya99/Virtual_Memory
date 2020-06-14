@@ -19,7 +19,7 @@ namespace virtual_memory {
         void AccessVirtualMemory(int id_process, int memory, int edit_field);
 
         //TODO: ADD EXPLANATION
-        void FreeProcess(int id_process, int memory);
+        void FreeProcess(int id_process);
 
         
     private:

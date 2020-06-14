@@ -24,6 +24,11 @@ int main(){
         system.AccessVirtualMemory(0, 21, 0);
         system.AccessVirtualMemory(0, 15, 1);
         system.AccessVirtualMemory(0, 21, 0);
+        system.FreeProcess(5);
+        system.FreeProcess(1);
+        system.FreeProcess(0);
+        system.UploadProcess(5, 33);
+        system.UploadProcess(0, 16);
     }
 
 

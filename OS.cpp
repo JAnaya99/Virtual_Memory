@@ -30,6 +30,17 @@ namespace virtual_memory {
         PrintResults(fifo_file_output_, fifo_status);
     }
 
+    void OS::FreeProcess(int id_process){
+        //Print the comand.
+        PrintHeaders('L', id_process);
+
+        //Free process memory (id_process).
+        StatusOr<std::vector<std::string>> lru_status = pcb_LRU_.FreeProcessMemory(id_process);
+        PrintResults(lru_file_output_, lru_status);
+        StatusOr<std::vector<std::string>> fifo_status = pcb_FIFO_.FreeProcessMemory(id_process);
+        PrintResults(fifo_file_output_, fifo_status);
+    }
+
     void OS::PrintHeaders(char type, int id_process, int memory_or_page, int edit_field){
         //Print the comand in both files.
         lru_file_output_.Print(lru_file_output_.HeaderToString(type, id_process, memory_or_page, edit_field));
