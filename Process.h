@@ -20,6 +20,7 @@ namespace virtual_memory {
         void EraseFromRam(int page, int new_pos);
         void EraseFromSwapping(int page, int new_pos);
 
+        int GetIndexPageFromSwapping(int page);
         int GetIndexPageFromRam(int page);
         void SetIndexPageFromRam(int page, int new_page);
 

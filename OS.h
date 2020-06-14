@@ -13,14 +13,15 @@ namespace virtual_memory {
         OS();
 
         //TODO: ADD EXPLANATION.
-        StatusOr<std::vector<std::string>> UploadProcess(int id_process, int memory);
+        void UploadProcess(int id_process, int memory);
 
         //TODO: What is modify or read?
-        StatusOr<std::vector<std::string>> AccessVirtualMemory(int id_process, int memory);
+        void AccessVirtualMemory(int id_process, int memory, int edit_field);
 
         //TODO: ADD EXPLANATION
-        StatusOr<std::vector<std::string>> FreeProcess(int id_process, int memory);
+        void FreeProcess(int id_process, int memory);
 
+        
     private:
         //Data for FIFO algorithm.
         PCB<replacement_algorithms::FIFO> pcb_FIFO_;
@@ -29,6 +30,10 @@ namespace virtual_memory {
         //Data for LRU algorithm.
         PCB<replacement_algorithms::LRU> pcb_LRU_;
         Printer lru_file_output_;
+
+        //TODO: ADD  EXPLANATION
+        void PrintHeaders(char type, int id_process, int memory_or_page = -1, int edit_field = -1);
+        void PrintResults(Printer& a, StatusOr<std::vector<std::string>>& status);
     };
 }
 

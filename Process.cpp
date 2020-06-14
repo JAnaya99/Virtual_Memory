@@ -25,6 +25,10 @@ namespace virtual_memory {
         return ram_indexes_[page];
     }
 
+    int Process::GetIndexPageFromSwapping(int page){
+        return swapping_indexes_[page];
+    }
+
     void Process::SetIndexPageFromRam(int page, int new_pos){
         ram_indexes_[page] = new_pos;
     }
