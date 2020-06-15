@@ -7,6 +7,7 @@
 #include "Printer.h"
 #include <vector>
 #include <string>
+
 namespace virtual_memory {
     class OS {
     public:
@@ -23,7 +24,7 @@ namespace virtual_memory {
 
         void RestartMemory();
 
-        
+
     private:
         //Data for FIFO algorithm.
         PCB<replacement_algorithms::FIFO> pcb_FIFO_;
@@ -35,7 +36,8 @@ namespace virtual_memory {
 
         //TODO: ADD  EXPLANATION
         void PrintHeaders(char type, int id_process = -1, int memory_or_page = -1, int edit_field = -1);
-        void PrintResults(Printer& a, StatusOr<std::vector<std::string>>& status);
+
+        void PrintResults(Printer &a, StatusOr<std::vector<std::string>> &status);
     };
 }
 

@@ -3,8 +3,6 @@
 #include "Constants.h"
 
 
-
-
 namespace virtual_memory {
     OS::OS() : lru_file_output_(constants::LRU_file_path), fifo_file_output_(constants::FIFO_file_path) {}
 
@@ -30,7 +28,7 @@ namespace virtual_memory {
         PrintResults(fifo_file_output_, fifo_status);
     }
 
-    void OS::FreeProcess(int id_process){
+    void OS::FreeProcess(int id_process) {
         //Print the comand.
         PrintHeaders('L', id_process);
 
@@ -41,7 +39,7 @@ namespace virtual_memory {
         PrintResults(fifo_file_output_, fifo_status);
     }
 
-    void OS::RestartMemory(){
+    void OS::RestartMemory() {
         //Print the comand.
         PrintHeaders('F');
 
@@ -56,16 +54,16 @@ namespace virtual_memory {
         pcb_FIFO_ = PCB<replacement_algorithms::FIFO>();
     }
 
-    void OS::PrintHeaders(char type, int id_process, int memory_or_page, int edit_field){
+    void OS::PrintHeaders(char type, int id_process, int memory_or_page, int edit_field) {
         //Print the comand in both files.
         lru_file_output_.Print(lru_file_output_.HeaderToString(type, id_process, memory_or_page, edit_field));
         fifo_file_output_.Print(fifo_file_output_.HeaderToString(type, id_process, memory_or_page, edit_field));
     }
 
-    void OS::PrintResults(Printer& file_output, StatusOr<std::vector<std::string>>& status){
-        if (status.GetStatus() == Status::kError){
+    void OS::PrintResults(Printer &file_output, StatusOr<std::vector<std::string>> &status) {
+        if (status.GetStatus() == Status::kError) {
             file_output.Print(status.GetMessage());
-        }else{
+        } else {
             file_output.Print(status.GetData());
         }
     }
