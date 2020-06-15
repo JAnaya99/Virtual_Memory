@@ -3,9 +3,12 @@
 
 #include "Page.h"
 
-//TODO: ADD COMMENTS.
+
 namespace virtual_memory {
+    // This namespace contains the replacement algorithm policies.
+    // To add other algorithm create a class and overload the operator () creating a custom comparator.
     namespace replacement_algorithms {
+        //Custom comparator for FIFO. Arrival time matter.
         class FIFO {
         public:
             bool operator()(const Page &a, const Page &b) {
@@ -13,6 +16,7 @@ namespace virtual_memory {
             }
         };
 
+        //Custom comparator for LRU. Last timestamp matter.
         class LRU {
         public:
             bool operator()(const Page &a, const Page &b) {
